@@ -1,0 +1,97 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<string> tasks;
+
+    while (true) {
+        system("cls");
+
+        cout << "Ежедневник\n";
+        cout << "-------------------------\n";
+        cout << "Выберите действие:\n";
+        cout << "1. Просмотреть задачи\n";
+        cout << "2. Добавить задачу\n";
+        cout << "3. Удалить задачу\n";
+        cout << "4. Выход\n";
+
+        cout << "Введите номер действия: ";
+        string input;
+        cin >> input;
+
+        if (input == "1") {
+            system("cls");
+            cout << "Задачи:\n";
+            cout << "-------------------------\n";
+
+            if (tasks.empty()) {
+                cout << "Пока задач нет.\n";
+            } else {
+                for (size_t i = 0; i < tasks.size(); i++) {
+                    cout << i + 1 << ". " << tasks[i] << "\n";
+                }
+            }
+
+            cout << "-------------------------\n";
+            cout << "Нажмите любую клавишу для продолжения...\n";
+            cin.ignore();
+            cin.get();
+        } else if (input == "2") {
+            system("cls");
+            cout << "Добавление задачи\n";
+            cout << "-------------------------\n";
+
+            cout << "Введите задачу: ";
+            string task;
+            cin.ignore();
+            getline(cin, task);
+            tasks.push_back(task);
+
+            cout << "-------------------------\n";
+            cout << "Задача успешно добавлена!\n";
+            cout << "Нажмите любую клавишу для продолжения...\n";
+            cin.get();
+        } else if (input == "3") {
+            system("cls");
+            cout << "Удаление задачи\n";
+            cout << "-------------------------\n";
+
+            if (tasks.empty()) {
+                cout << "Пока задач нет.\n";
+            } else {
+                cout << "Выберите номер задачи для удаления:\n";
+
+                for (size_t i = 0; i < tasks.size(); i++) {
+                    cout << i + 1 << ". " << tasks[i] << "\n";
+                }
+
+                cout << "Введите номер задачи: ";
+                int taskNumber;
+                cin >> taskNumber;
+
+                if (taskNumber > 0 && taskNumber <= static_cast<int>(tasks.size())) {
+                    tasks.erase(tasks.begin() + taskNumber - 1);
+                    cout << "Задача успешно удалена!\n";
+                } else {
+                    cout << "Некорректный номер задачи.\n";
+                }
+            }
+
+            cout << "-------------------------\n";
+            cout << "Нажмите любую клавишу для продолжения...\n";
+            cin.ignore();
+            cin.get();
+        } else if (input == "4") {
+            cout << "До свидания!\n";
+            break;
+        } else {
+            cout << "Некорректное действие.\n";
+            cout << "Нажмите любую клавишу для продолжения...\n";
+            cin.ignore();
+            cin.get();
+        }
+    }
+
+    return 0;
+}
